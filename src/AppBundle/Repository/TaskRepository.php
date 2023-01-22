@@ -37,4 +37,15 @@ class TaskRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function findOrphanTasks()
+    {
+        $query = $this->getEntityManager()
+        ->createQuery(
+            'SELECT t FROM AppBundle:Task t '.
+            'WHERE t.user is NULL'
+            );
+
+        return $query->getResult();
+    }
 }
