@@ -11,4 +11,7 @@
         <button type="submit" class="btn btn-success pull-right">Modifier</button>
         {{ form_end(form) }}
     </div>
+    <div class="row">
+        <a href="{{ path('user_delete', {'id' : user.id}) }}" type="button" class="btn btn-danger pull-right">Supprimer l'utilisateur</a>
+    </div>
 {% endblock %}

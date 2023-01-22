@@ -21,6 +21,14 @@ class TaskController extends Controller
     }
 
     /**
+     * @Route("/tasks/orphanList", name="task_list_orphans")
+     */
+    public function listOrphanTaks()
+    {
+        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findOrphanTasks()]);
+    }
+
+    /**
      * @Route("/tasks/create", name="task_create")
      */
     public function createAction(Request $request)
