@@ -32,13 +32,25 @@ class TaskRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery(
                 'SELECT t FROM AppBundle:Task t '.
-                'WHERE t.user = :user'
+                'WHERE t.user = :user '
         )->setParameter('user', $userId);
 
         return $query->getResult();
     }
 
-    public function findOrphanTasks()
+    public function findOpenTasksByUserId($userId)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT t FROM AppBundle:Task t '.
+                'WHERE t.user = :user '.
+                'AND t.isDone = 0'
+        )->setParameter('user', $userId);
+
+        return $query->getResult();
+    }
+
+    public function findAnonymousTasks()
     {
         $query = $this->getEntityManager()
         ->createQuery(
@@ -47,5 +59,22 @@ class TaskRepository extends EntityRepository
             );
 
         return $query->getResult();
+    }
+
+    public function findDoneTasksByUserId($userId)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT t FROM AppBundle:Task t '.
+                'WHERE t.user = :user '.
+                'AND t.isDone = 1'
+        )->setParameter('user', $userId);
+
+        return $query->getResult();
+    }
+
+    public function deleteUserIdFromTasks($id)
+    {
+
     }
 }
