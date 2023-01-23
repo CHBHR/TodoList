@@ -43,7 +43,7 @@
                 {% if app.user %}
                     <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
                 {% else %}
-                    <a href="{{ path('user_create') }}" class="btn btn-primary">S'inscrire</a>
+                    <a href="{{ path('signup') }}" class="btn btn-primary">S'inscrire</a>
                 {% endif %}
 {# 
                 {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
