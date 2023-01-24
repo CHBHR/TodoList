@@ -13,7 +13,7 @@ class CreateUserController extends Controller
     /**
      * @Route("/admin/users/create", name="user_create")
      */
-    public function createAction(Request $request)
+    public function createUser(Request $request)
     {
         $user = new User();
 

@@ -14,7 +14,7 @@ class EditUserController extends Controller
     /**
      * @Route("/admin/users/{id}/edit", name="user_edit")
      */
-    public function editAction(User $user, Request $request)
+    public function editUser(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user);
 
