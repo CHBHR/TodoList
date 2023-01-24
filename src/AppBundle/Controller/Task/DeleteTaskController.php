@@ -11,7 +11,7 @@ class DeleteTaskController extends Controller
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
      */
-    public function deleteTaskAction(Task $task)
+    public function deleteTask(Task $task)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);

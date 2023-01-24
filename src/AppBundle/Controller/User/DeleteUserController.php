@@ -10,7 +10,7 @@ class DeleteUserController extends Controller
     /**
      * @Route("/admin/users/{id}/delete", name="user_delete")
      */
-    public function deleteAction($id)
+    public function deleteUser($id)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find((int) $id);
 

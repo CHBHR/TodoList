@@ -10,7 +10,7 @@ class ListUserController extends Controller
     /**
      * @Route("/admin/users", name="user_list")
      */
-    public function listAction()
+    public function listUser()
     {
         return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
     }
