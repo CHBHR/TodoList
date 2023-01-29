@@ -27,5 +27,8 @@
                 <directory>src/*/Bundle/*Bundle/Resources</directory>
             </exclude>
         </whitelist>
+        <logging>
+            <log type="coverage-text" target="php://stdout"/>
+        </logging>
     </filter>
 </phpunit>
