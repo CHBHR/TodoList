@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,7 +16,18 @@ class TaskType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
-            // Add username ?
+            ->add('hasDeadLine', CheckboxType::class,
+                [
+                    'label' => "Ajouter une 'dead-line' ?",
+                    'required' => false,
+                ])
+            ->add('deadLine', DateType::class,
+                [
+                    'label' => "Date limite",
+                    'required' => false,
+                    'data'   => new \DateTime(),
+                    'attr'  => ['min' => ( new \DateTime() )->format('d-m-Y')]
+                ])
         ;
     }
 }
