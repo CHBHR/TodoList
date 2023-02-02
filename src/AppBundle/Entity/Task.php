@@ -47,10 +47,21 @@ class Task
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasDeadLine;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deadLine;
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
         $this->isDone = false;
+        $this->deadLine = null;
     }
 
     public function getId()
@@ -93,9 +104,34 @@ class Task
         return $this->isDone;
     }
 
-    public function toggle($flag)
+    public function toggleIsDone($flag)
     {
         $this->isDone = $flag;
+    }
+
+    public function getHasDeadLine()
+    {
+        return $this->hasDeadLine;
+    }
+
+    public function setHasDeadLine($hasDeadLine)
+    {
+        return $this->hasDeadLine = $hasDeadLine;
+    }
+
+    public function toggleDeadLine($flag)
+    {
+        $this->hasDeadLine = $flag;
+    }
+
+    public function getDeadLine()
+    {
+        return $this->deadLine;
+    }
+
+    public function setDeadLine($deadLine)
+    {
+        $this->deadLine = $deadLine;
     }
 
     /**

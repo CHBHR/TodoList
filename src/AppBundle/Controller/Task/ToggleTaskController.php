@@ -9,11 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ToggleTaskController extends Controller
 {
     /**
-     * @Route("/tasks/{id}/toggle", name="task_toggle")
+     * @Route("/tasks/{id}/toggle", name="task_toggle_isDone")
      */
     public function toggleTaskAction(Task $task)
     {
-        $task->toggle(!$task->isDone());
+        $task->toggleIsDone(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));

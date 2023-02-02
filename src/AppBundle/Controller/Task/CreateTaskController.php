@@ -35,6 +35,14 @@ class CreateTaskController extends Controller
                 $task->setUser($user);
             }
 
+            // Check si une deadline a été précisée sinon null
+            if($form["hasDeadLine"]->getData() === true)
+            {
+                $task->setDeadLine($form["deadLine"]->getData());
+            } else if($form["hasDeadLine"]->getData() === false) {
+                $task->setDeadLine(Null);
+            }
+
             $em->persist($task);
             $em->flush();
 
