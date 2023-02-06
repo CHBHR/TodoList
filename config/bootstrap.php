@@ -18,7 +18,7 @@ if (is_array($env = @include dirname(__DIR__).'/.env.local.php') && (!isset($env
 
     // load all the .env files
     if (method_exists($dotenv, 'loadEnv')) {
-        $dotenv->loadEnv($path);
+        $dotenv->load($path);
     } else {
         // fallback code in case your Dotenv component is not 4.2 or higher (when loadEnv() was added)
 
