@@ -1,51 +1,61 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
+namespace App;
+
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 
-class AppKernel extends Kernel
+class AppKernel extends BaseKernel
 {
-    public function registerBundles()
-    {
-        $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new AppBundle\AppBundle(),
-        ];
+    use MicroKernelTrait;
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-        }
-
-        return $bundles;
-    }
-
-    public function getRootDir()
-    {
-        return __DIR__;
-    }
+    const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        return $this->getProjectDir().'/var/cache/'.$this->environment;
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        return $this->getProjectDir().'/var/log';
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerBundles()
     {
-        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+        $contents = require $this->getProjectDir().'/config/bundles.php';
+        foreach ($contents as $class => $envs) {
+            if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+                yield new $class();
+            }
+        }
+    }
+
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
+        // Feel free to remove the "container.autowiring.strict_mode" parameter
+        // if you are using symfony/dependency-injection 4.0+ as it's the default behavior
+        $container->setParameter('container.autowiring.strict_mode', true);
+        $container->setParameter('container.dumper.inline_class_loader', true);
+        $confDir = $this->getProjectDir().'/config';
+
+        $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+    }
+
+    protected function configureRoutes(RouteCollectionBuilder $routes)
+    {
+        $confDir = $this->getProjectDir().'/config';
+
+        $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 }
