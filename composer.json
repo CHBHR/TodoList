@@ -1,10 +1,10 @@
 {
-    "name": "saro0h/to-do-list",
+    "name": "chbhr/to-do-list",
     "license": "proprietary",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "": "AppBundle/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -28,7 +28,7 @@
         "symfony/config": "^3.4.30|^4.3.3",
         "symfony/console": "^3.4.30|^4.3.3",
         "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/framework-extra-bundle": "*",
         "incenteev/composer-parameter-handler": "^2.0",
         "twig/extensions": "^1.5"
     },
@@ -62,6 +62,11 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": false
         }
     }
 }
