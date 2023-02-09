@@ -7,26 +7,25 @@ use App\Form\SignUpType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SignUpController extends Controller
 {
     /**
      * @Route("/signup", name="signup")
      */
-    public function signUp(Request $request)
+    public function signUp(Request $request,UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(SignUpType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
+            $encodedPassword = $encoder->encodePassword($user, $form["password"]->getData());
+            $user->setPassword($encodedPassword);
             $user->setRoles(['ROLE_USER']);
-
             $em->persist($user);
             $em->flush();
 

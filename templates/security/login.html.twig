@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block header_title %}<h1>Connexion</h1>{% endblock %}
+
 {% block body %}
     {% if error %}
-        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {# <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+        <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
-
-    <form action="{{ path('login_check') }}" method="post">
+    
+    
+    <form action="{{ path('login') }}" method="post">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
@@ -14,4 +18,5 @@
 
         <button class="btn btn-success" type="submit">Se connecter</button>
     </form>
+
 {% endblock %}

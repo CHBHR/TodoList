@@ -4,14 +4,13 @@ namespace App\Controller\Authentication;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
 {
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request)
+    public function login()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -22,21 +21,5 @@ class LoginController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
-    }
-
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function loginCheck()
-    {
-        // This code is never executed.
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutCheck()
-    {
-        // This code is never executed.
     }
 }
