@@ -4,11 +4,11 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Request;
 
-class CreateUserController extends Controller
+class CreateUserController extends AbstractController
 {
     /**
      * @Route("/admin/users/create", name="user_create")

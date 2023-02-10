@@ -4,11 +4,11 @@ namespace App\Controller\Task;
 
 use App\Entity\Task;
 use App\Form\TaskType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateTaskController extends Controller
+class CreateTaskController extends AbstractController
 {
     /**
      * Créer une task lié à l'utilisateur

@@ -2,10 +2,10 @@
 
 namespace App\Controller\Task;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ListTaskController extends Controller
+class ListTaskController extends AbstractController
 {
     /**
      * Récupère la liste des tasks non finies lié à l'id de l'utilisateur

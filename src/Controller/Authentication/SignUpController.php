@@ -4,12 +4,12 @@ namespace App\Controller\Authentication;
 
 use App\Entity\User;
 use App\Form\SignUpType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class SignUpController extends Controller
+class SignUpController extends AbstractController
 {
     /**
      * @Route("/signup", name="signup")

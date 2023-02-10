@@ -3,10 +3,10 @@
 namespace App\Controller\Task;
 
 use App\Entity\Task;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ToggleTaskController extends Controller
+class ToggleTaskController extends AbstractController
 {
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle_isDone")

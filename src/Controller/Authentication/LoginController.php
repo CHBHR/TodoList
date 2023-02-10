@@ -2,10 +2,10 @@
 
 namespace App\Controller\Authentication;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LoginController extends Controller
+class LoginController extends AbstractController
 {
     /**
      * @Route("/login", name="login")

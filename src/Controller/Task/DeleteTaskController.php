@@ -3,10 +3,10 @@
 namespace App\Controller\Task;
 
 use App\Entity\Task;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DeleteTaskController extends Controller
+class DeleteTaskController extends AbstractController
 {
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")

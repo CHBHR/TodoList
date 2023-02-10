@@ -2,10 +2,10 @@
 
 namespace App\Controller\User;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DeleteUserController extends Controller
+class DeleteUserController extends AbstractController
 {
     /**
      * @Route("/admin/users/{id}/delete", name="user_delete")
