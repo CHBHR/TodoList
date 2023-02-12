@@ -31,12 +31,14 @@ class UserFixturesTest extends Fixture
         $user2->setUsername('UserStub2');
         $user2->setEmail('user2@test.com');
         $user2->setPassword($this->encoder->encodePassword($user2, 'test'));
+        $user1->setRoles(['ROLE_USER']);
         $manager->persist($user2);
 
         $user3 = new User();
         $user3->setUsername('UserStub3');
         $user3->setEmail('user3@test.com');
         $user3->setPassword($this->encoder->encodePassword($user3, 'test'));
+        $user1->setRoles(['ROLE_USER']);
         $manager->persist($user3);
 
         $manager->flush();

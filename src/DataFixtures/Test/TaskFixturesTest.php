@@ -5,8 +5,9 @@ namespace App\DataFixtures\Test;
 use App\Entity\Task;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TaskFixturesTest extends Fixture
+class TaskFixturesTest extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

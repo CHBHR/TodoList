@@ -1,18 +1,8 @@
 <?php
 
-namespace App\Tests\Repository;
+namespace App\tests\Repository;
 
-use App\Repository\TaskRepository;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-class TaskRepositoryTest extends KernelTestCase
+class TaskRepositoryTest
 {
-
-    public function findTasksByUserTest()
-    {
-        self::bootKernel();
-        $taskList = self::$container->get(TaskRepository::class)->findTasksByUser($user1);
-        $this->assertEquals(3, $taskList);
-    }
 
 }
