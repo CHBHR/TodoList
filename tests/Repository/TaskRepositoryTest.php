@@ -2,7 +2,9 @@
 
 namespace App\tests\Repository;
 
-class TaskRepositoryTest
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
+class TaskRepositoryTest extends KernelTestCase
 {
 
 }
