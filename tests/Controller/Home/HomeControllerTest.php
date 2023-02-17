@@ -2,9 +2,7 @@
 
 namespace App\Tests\Controller\Home;
 
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeControllerTest extends WebTestCase

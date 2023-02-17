@@ -2,18 +2,11 @@
 
 namespace App\tests\Controller\Authentication;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\tests\Controller\AbstractControllerTest;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginControllerTest extends WebTestCase
+class LoginControllerTest extends AbstractControllerTest
 {
-    
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->client = self::createClient();
-    }
 
     /**
      * @test
@@ -28,42 +21,20 @@ class LoginControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function loginWithInvalidCredentials()
-    {
-        $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('Se connecter')->form();
-        $form['_username'] = 'user';
-        $form['_password'] = 'test';
-        $this->client->submit($form);
-        $this->client->followRedirect();
-
-        static::assertSame(200, $this->client->getResponse()->getStatusCode());
-
-    }
-
-    /**
-     * 
-     */
     public function loginWithValidCredentials()
     {
-        $client = static::createClient([], 
-            [
-                'PHP_AUTH_USER' => 'user1',
-                'PHP_AUTH_PW'   => 'password',
-            ]
-        );
+        $userTest = $this->createTestUser();
 
-        $crawler = $client->request('GET', '/login');
+        $this->client->request('GET', '/login');
 
-        $form = $crawler->selectButton('Se connecter')->form();
+        $this->logIn($userTest->getId());
 
-        $form['_username'] = 'user1';
-        $form['_password'] = 'test';
-        $client->submit($form);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        
+        
+        $this->deleteTestUser($userTest);
+        $this->tearDown();
 
-        //$crawler = $client->followRedirect();
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function tearDown(): void

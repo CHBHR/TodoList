@@ -25,6 +25,10 @@ security:
                 check_path: login
                 always_use_default_target_path:  true
                 default_target_path:  /
+            remember_me:
+                secret:      "%kernel.secret%"
+                # possible values: 'strict', 'lax' and null
+                samesite: null
             logout:
                 path:   /logout
                 target: /home
