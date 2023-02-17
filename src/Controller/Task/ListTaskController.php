@@ -2,6 +2,8 @@
 
 namespace App\Controller\Task;
 
+use App\Entity\Task;
+use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +17,9 @@ class ListTaskController extends AbstractController
     public function listTasks()
     {
         $user = $this->getUser()->getId();
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findOpenTasksByUserId($user)]);
+        return $this->render('task/list.html.twig', [
+            'tasks' => $this->getDoctrine()->getRepository(Task::class)->findOpenTasksByUserId($user)
+        ]);
     }
 
     /**
@@ -25,7 +29,7 @@ class ListTaskController extends AbstractController
      */
     public function listAnonymousTaks()
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAnonymousTasks()]);
+        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository(Task::class)->findAnonymousTasks()]);
     }
 
     /**
@@ -36,6 +40,6 @@ class ListTaskController extends AbstractController
     public function listDoneTasks()
     {
         $user = $this->getUser()->getId();
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findDoneTasksByUserId($user)]);
+        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository(Task::class)->findDoneTasksByUserId($user)]);
     }
 }

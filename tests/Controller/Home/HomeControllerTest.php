@@ -2,34 +2,34 @@
 
 namespace App\Tests\Controller\Home;
 
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeControllerTest extends WebTestCase
 {
-    /**
-     * @test
-     */
-    public function homeNotConnectedShouldRedirectToLogin()
+    public $client = null;
+    
+    public function setUp() : void
     {
-        $client = static::createClient();
-        $crawler= $client->request('GET', '/');
-
-        $this->assertSame(Response::HTTP_FOUND,$client->getResponse()->getStatusCode());
-        $this->assertResponseRedirects('http://localhost/login');
+       $this->client = static::createClient();
     }
 
     /**
      * @test
      */
-    public function homeConnectedShouldReturnHome()
+    public function homeNotConnectedShouldRedirectToLogin()
     {
-        $client = static::createClient();
-        
-        $user = new User();
-        $user->setUsername('usernameTest');
-        $user->setPassword('password');
-        $user->setEmail('connectedUserTest@gmail.com');
+        $this->client->request('GET', '/');
+        $this->assertSame(Response::HTTP_FOUND,$this->client->getResponse()->getStatusCode());
+        $this->assertResponseRedirects('http://localhost/login');
+
+        $crawler = $this->client->followRedirect();
+        // Test if login field exists
+        static::assertSame(1, $crawler->filter('input[name="_username"]')->count());
+        static::assertSame(1, $crawler->filter('input[name="_password"]')->count());
+    }
+
+    public function homeConnectedReturnsOk()
+    {
     }
 }

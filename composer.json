@@ -52,7 +52,8 @@
         "symfony/options-resolver": "~4.3|^5.0",
         "symfony/security-guard": "^4.2|^5",
         "symfony/dom-crawler": "^4.0",
-        "symfony/security-http": "^4.4"
+        "symfony/security-http": "^4.4",
+        "doctrine/dbal": "^3.6"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "*",
@@ -61,19 +62,15 @@
         "symfony/web-server-bundle": "4.0.*",
         "symfony/stopwatch": "4.0.*",
         "symfony/web-profiler-bundle": "^4.4",
-        "liip/test-fixtures-bundle": "^2.0.0",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/css-selector": "4.4.*"
-    },
+        },
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@symfony-scripts"
-        ],
-        "post-update-cmd": [
             "@symfony-scripts"
         ]
     },

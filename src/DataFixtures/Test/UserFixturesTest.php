@@ -18,25 +18,28 @@ class UserFixturesTest extends Fixture
     {
         $this->encoder = $encoder;
     }
+    
     public function load(ObjectManager $manager)
     {
         $user1 = new User();
-        $user1->setUsername('UserStub1');
+        $user1->setUsername('User1');
         $user1->setEmail('user1@test.com');
         $user1->setPassword($this->encoder->encodePassword($user1, 'test'));
         $user1->setRoles(['ROLE_ADMIN']);
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setUsername('UserStub2');
+        $user2->setUsername('User2');
         $user2->setEmail('user2@test.com');
         $user2->setPassword($this->encoder->encodePassword($user2, 'test'));
+        $user2->setRoles(['ROLE_USER']);
         $manager->persist($user2);
 
         $user3 = new User();
-        $user3->setUsername('UserStub3');
+        $user3->setUsername('User3');
         $user3->setEmail('user3@test.com');
         $user3->setPassword($this->encoder->encodePassword($user3, 'test'));
+        $user3->setRoles(['ROLE_USER']);
         $manager->persist($user3);
 
         $manager->flush();
