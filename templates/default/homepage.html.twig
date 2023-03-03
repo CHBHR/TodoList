@@ -3,8 +3,12 @@
 {% block header_title %}
     <div class="container">
         <h1>Bienvenue sur Todo List</h1>
-        <h2>l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h2>  
+        <h2>l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h2>
+        <img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="todo list">
     </div>
+{% endblock %}
+{% block header_img %}
+    <img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="todo list">
 {% endblock %}
 
 {% block body %}
