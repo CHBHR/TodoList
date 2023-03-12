@@ -58,7 +58,7 @@ Migrating the project to Symfony 4.4 created a lot of issues (not including depr
 - The change of project init and of the Bootstrap.php and Kernel.php files was very hard to manage and control
 - A lot on hidden executions causing unwanted slowness during tech audit
 All of those issues are documented and can be found in the documentation here: (TOBEFILLED)
-```
+
 Those issues made for a codebase that became very hard to manage, fix or maintain.
 Therefore, I chose to transfer the functionnalities to a new and updated web app project : https://github.com/CHBHR/TodoList_Remastered
 
